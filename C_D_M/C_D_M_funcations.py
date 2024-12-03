@@ -3,7 +3,6 @@ from phi.model.google import Gemini
 from phi.agent import Agent, RunResponse
 from typing import Iterator
 from pydantic import BaseModel, Field
-import json
 def ideal_customer_profile(product_description):
     icp_agent=Agent(
         model=Gemini(id="gemini-1.5-flash-8b"),
@@ -13,7 +12,6 @@ def ideal_customer_profile(product_description):
                                     "make sure the information is correct",
                                     "give pricise labels that leaves no confusion",
                                     "give relatively favorable Ideal Customer Profile",
-                                    "provide in format that is like ='description':{....,....}'"
                                     ]
         ,structured_outputs=True,
     )
@@ -48,7 +46,7 @@ def qestions_for_personas(qestions,persona,description):
         product="the description product your opinion will be asked for is"+description
         icp_agent=Agent(
             model=Gemini(id="gemini-1.5-flash-8b"),
-            markdown=True,instructions=[persona_agent]
+            markdown=True,instructions=[persona_agent,product]
 
             ,structured_outputs=True,
         )
