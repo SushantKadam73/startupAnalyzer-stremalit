@@ -1,0 +1,5 @@
+CDM = Customer Discovery Module	
+ICP_generator = ICP generation and refinement
+NMA =	Need-mapping algorithms
+VPA =	Validation process automation
+CJS =	Customer journey simulation

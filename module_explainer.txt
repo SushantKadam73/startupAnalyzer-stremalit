@@ -1,0 +1,112 @@
+C_D_M :
+    
+    
+    C_D_M_agent : contains
+
+        customer_discovery_module_agent: description
+            this module stichches CJS,ICP,NMA,VPA together and runs them
+    
+    
+    CJS : contains
+        
+        customer_jorney_setup : description
+            dictates how the customer will go through stages of the product
+
+        generate_retrive_personas : description
+            generates personas based on the ideal customer profile
+
+        customer_journey_simulation : description
+            simulates to the persona. journey stages are retrived from customer_jorney_setup and then asks the qestions to the personas related to product
+    
+    
+    ICP_generator : contains
+
+        generatr_ICP : description
+            genrates icp according to the product
+        
+        file_ICP : description
+            checks wheather the ideal customer profile matchs product
+
+        generatr_ICP_refine: description
+            refines the ideal customer profile
+
+    
+    NMA : contains
+        
+        need_of_the_customer : description
+            analyses the needs of the customer and how the product meets those needs
+    
+
+    VPA : contains
+
+        vpa : description
+            analyses the value proposition of the product matches the need of the customer
+    
+    
+knowlege_base : description
+    stores the data of the companies and use it for process
+
+    
+modules : contains
+
+    api_calls_module : description
+
+        ask_llm : description
+            asks question to the llm and returns the answer
+
+        ask_jina : description
+            asks qestions to the jina and returns the answer
+
+        scrape_with_jina : description
+            scrapes the website
+
+
+    small_modules : contains
+
+        extract_website_name : description
+            extracts the website name from the url
+
+        is_social_media : description
+            checks wheather the url is a social media url or not
+
+        is_image_url : description
+            checks wheather the url is a image url or not
+
+        is_file_present_updated:
+            checks wheather the file is present and updated within last 24 hour or not
+
+    talking_agent : contains
+
+        taklking : description
+            allows users to talk to the ai personas
+
+
+P_E_E : work in progress
+
+Scrapers : contains
+    
+    reddit_scraper : contains
+        reddit_scrape_post_comment : description
+            scrapes the reddit post and comments from the given reddit link
+
+        reddit_scrape_and_explainer : description
+            scrapes the reddit post and comments from the given reddit link and associte weather it is sentiments
+
+    url_to_llm_friend : contains
+        url_to_llm_explainer : description
+        	scrapes the url simplify sort some of the data into llm friendly way
+
+
+qestionear_agent : contains
+    
+    qestion_answer_agent : description
+        takes the url finds data in data store else does google search to find the answer to the question
+
+
+report_builder  : contains
+    
+    report_builder : description
+        builds the report based on the data provided
+    
+    final_report_builder : description
+        builds the final report based on the report generated privously 
