@@ -60,19 +60,4 @@ def final_report_builder(company_name):
     response=api_calls_module.ask_llm(Report_data,False,["you are a helpful report assisatant","do not make details use only the dtails i provide","write a 20000 word report","write in a simple languge so that a 18 year old could understand"])
     report_save.write(response+"\n")
     report_save.close()
-    import markdown2
-    import pdfkit
-    company_name="100xengineers"
-    filename = "knowlege_base/"+company_name+"/"+company_name+"_final_report.md"
-    mode = "r"
-    from markdown_pdf import MarkdownPdf, Section
-    with open(filename, mode) as file:
-        markdown_text = file.read()
-    pdf = MarkdownPdf()
-    pdf.meta["title"] = 'output'
-    pdf.add_section(Section(markdown_text, toc=False))
-    pdf.save('output.pdf')
-    html_text = markdown2.markdown(markdown_text)
-    pdfkit.from_string(html_text, "output.pdf")
-    
     return location_of_report

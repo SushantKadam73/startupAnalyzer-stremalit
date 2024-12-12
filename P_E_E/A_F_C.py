@@ -34,3 +34,4 @@ def collect_feedback_of_the_user(company_name):
             pass
     response=api_calls_module.ask_llm("according to this data about the product tell me how is the sentiment data:",False,["do not make up answers use and quote what is the data while explaination.","product:"+str(product)])
     response=report_builder.report_builder([response],"product evalution engine",company_name)
+    return response

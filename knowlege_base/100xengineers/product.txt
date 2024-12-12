@@ -1,14 +1,1 @@
-100xEngineers is a course focused on practical generative AI skills.  It's described as a hands-on, project-based course, distinct from ChatGPT-only tutorials.  The course covers a range of topics including:
-
-* **Fundamentals:** Generative AI history, research, and different AI platforms.
-* **Diffusion Models:**  Detailed study and application.
-* **Stable Diffusion:**  Techniques and tools.
-* **Prompt Engineering:**  Strategies for effective prompt creation.
-* **Fine-tuning Models:**  Using Lora datasets, parameters, and advanced techniques.
-* **Model Deployment (MLOps):**  Implementation and deployment.
-* **PyTorch, LLMs, AI Agents:**  Coverage of neural networks, large language models, and AI agents (Autogen, crewAI, AssistantAPIs).
-* **RAG (Retrieval Augmented Generation):**  Langchain and Llamaindex for RAG.
-* **Vector Databases:**  Use in LLM memory.
-* **Tools & Frameworks:**  Python, Langchain, GitHub, Google Colab, DALL-E 3, PyTorch, Hugging Face, CivitAI, Midjourney, Replicate, Dreambooth, OpenAI API, Auto1111, Stable Diffusion, ComfyUI.
-
-The course is taught by experienced individuals with backgrounds in AI research and product development.  It emphasizes practical application through project work.  No specific financial data or market share information is given.
+100xEngineers is a generative AI engineering course.  It aims to teach practical skills in generative AI through project-based learning, distinguishing itself from courses focusing solely on tools like ChatGPT.  The course covers a range of topics, including generative AI fundamentals, diffusion models (with a focus on Stable Diffusion), prompt engineering, fine-tuning models, model deployment (MLOps), and specific tools and frameworks like PyTorch, Langchain, GitHub, Google Colab, and various AI APIs (OpenAI, DALL-E 3, etc.).  The course also includes instruction on LLMs, AI Agents, RAG (Retrieval Augmented Generation) and vector databases.
