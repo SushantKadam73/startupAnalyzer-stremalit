@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv, find_dotenv
 from pathlib import Path
 import time
-load_dotenv(Path("keys.env"))
+load_dotenv(Path(".env"))
 print(os.getenv("CONNSTRING"))
 jina_api_key=os.getenv("JINA_AI_KEY")
 def ask_llm(llm_qes,line_allowed,instructions):
