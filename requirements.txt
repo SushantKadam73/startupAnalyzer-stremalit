@@ -25,3 +25,4 @@ together==1.3.5
 
 pycountry
 sqlalchemy
+google-generativeai
