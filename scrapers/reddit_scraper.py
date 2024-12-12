@@ -10,7 +10,7 @@ def reddit_scrape_post_comment(link):
     names_of_commentor=[]
     reddit= praw.Reddit(client_id="vXMP5m8vI2g1tBe51bUfzw",client_secret="w1oMJa8AgySG5yKDb2eRVUrBXBpHMA",user_agent="rajeshwar",username="South_Turnip_5618",password="123qwertyuiop@")
     link = link
-    reddit_submission=reddit.submission(url=link).comment_limit(10)
+    reddit_submission=reddit.submission(url=link)
     name_of_poster=reddit_submission.author
     title_body=reddit_submission.title
     title_body=title_body+reddit_submission.selftext

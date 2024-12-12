@@ -24,7 +24,7 @@ def ask_llm(llm_qes,line_allowed,instructions):
         response = m_agent.run(str(llm_qes))
         response=response.content
     except:
-        time.sleep(60)
+        time.sleep(30)
         response = m_agent.run(str(llm_qes))
         response=response.content
     fin_response=[]

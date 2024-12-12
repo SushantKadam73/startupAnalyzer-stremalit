@@ -2,9 +2,8 @@ import sys
 sys.path.append('../6-12-2024')
 from modules import api_calls_module,small_modules
 def generatr_ICP(company_name):
-    context_file=open("knowlege_base/"+company_name+"/company_website_details.txt", "r").read()
+    context_file=open("knowlege_base/"+company_name+"/product.txt", "r").read()
     context=api_calls_module.ask_llm(context_file,False,["what is the product in following .please provide a detailed description","only include details that are present in the following"])
-    open("knowlege_base/"+company_name+"/product.txt", "w").write(context)
     response=api_calls_module.ask_llm(context,True,["according to product what are the target customer's Demographics ,Professional_Profile ,Psychology ,values,behaviours ,media consumption , occupation industry ,challenges ,motivation  ,goals","give me answer 10 words each"])
     
     return [response,context]
@@ -30,6 +29,9 @@ def generatr_ICP_refine(company_name):
             icp_verified=True
             response=icp
         else:
+            context_file=open("knowlege_base/"+company_name+"/company_website_details.txt", "r").read()
+            context=api_calls_module.ask_llm(context_file,False,["what is the product in following .please provide a detailed description","only include details that are present in the following"])
+            open("knowlege_base/"+company_name+"/product.txt", "w").write(context)
             icp_data=generatr_ICP(company_name)
             icp="".join(icp_data[0])
             print(icp_data[0])

@@ -1,6 +1,7 @@
 import sys
 sys.path.append('../6-12-2024')
 from modules import api_calls_module,talking_agent,small_modules
+import report_builder
 import csv
 def customer_jorney_setup(product,company_name):
     response=api_calls_module.ask_llm("what are the steps a customer will go through while using the product",False,["do not make up answer","give answer according to only the product and product_phases","product :"+str(product)])
@@ -22,10 +23,15 @@ def generate_retrive_personas(comapany_name):
         
     else:
         id_last_used=0
-        with open("knowlege_base/globals_store.csv", 'r') as csvfile:
-            list_read_csv = csv.reader(csvfile)
-            for read_row in list_read_csv:
-                id_last_used=read_row[0]
+        try:
+            with open("knowlege_base/globals_store.csv", 'r') as csvfile:
+                list_read_csv = csv.reader(csvfile)
+                for read_row in list_read_csv:
+                    id_last_used=read_row[0]
+        except:
+            with open("knowlege_base/globals_store.csv", 'w') as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow(str(0))
         icp=open("knowlege_base/"+comapany_name+"/icp.txt","r").read()
         response=api_calls_module.ask_llm(icp,True,["generate 10 personas depending on icp","you can use upto 60 word for a line","give me only the persona description and in one line each"])
         with open(file_is, 'w', newline='') as csvfile:
@@ -36,15 +42,15 @@ def generate_retrive_personas(comapany_name):
                 count+=1
                 rows.append([i,response[count-1]])
                 writer.writerow([i,response[count-1]])
-        open("knowlege_base/globals_store.csv","w").write(str(id_last_used+10))
+        open("knowlege_base/globals_store.csv","w").write(str(int(id_last_used)+10))
 
     persona_ids=[]
     persona_ids_description=[]
     count=0
     
     for i in rows:
-        persona_ids.append(i[fileds.index("persona_id")])
-        persona_ids_description.append(i[fileds.index("persona_description")]) 
+        persona_ids.append(i[0])
+        persona_ids_description.append(i[1]) 
         count+=1
     return  persona_ids,persona_ids_description
         
@@ -60,8 +66,12 @@ def customer_journey_simulation(company_name):
     questions_for_persona="answer these question as you have walked through my product:"+questions_for_persona
     print(questions_for_persona)
     for i in range(1,11):
+        print(i)
         #let persona walkthrough the steps
         persona_response=talking_agent.taklking(questions_for_persona,str(persona_ids[i-1]),str("you are "+persona_ids_description[i-1]),False,"you have experincinced the produc in this way :"+product_phases)
         all_persona_responses.append(str(i)+":"+persona_response)
-    file_save=open("knowlege_base/"+company_name+"/persona_responses.txt","w").write("\n".join(all_persona_responses))
+    print("saving_persona_results")
+    file_save=open("knowlege_base/"+str(company_name)+"/persona_responses.txt","w",encoding="utf-8").write("\n".join(all_persona_responses))
+    print("building_persona_report")
+    report_persona_response=report_builder.report_builder([("\n".join(all_persona_responses))],"persona_review",company_name)
     return all_persona_responses

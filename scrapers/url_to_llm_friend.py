@@ -27,16 +27,26 @@ def url_to_llm_explainer(url):
             for i in open("knowlege_base/"+name_of_file+"/main_points.txt","r"):
                 main_points+=i
             return [usable_website_data,important_urls,spare_urls,main_points]
+    promblems_in_scraping=True
+    while promblems_in_scraping!=False:    
+        tmp=api_call_pro.scrape_with_jina(url)
+        if tmp.startswith("event: error"):
+            pass
 
-    tmp=api_call_pro.scrape_with_jina(url)
-    usable_website_data=api_call_pro.ask_llm(tmp,False,["convert the given data into human readable way",
-        "Company Profile, About, Coverage Areas, People, founders and their socials,",
-        "Cap Tables, Investments & Acquisitions Exits, Funding & Investors",
-        "Competitive Landscape, Competitors, Explore Similar, Comparable",
-        "Market share and retention, Reports, News",
-        "Financials, Key Metrics, Metrics",
-        "Social Media profile and metrics"
-    ])
+        else:
+            promblems_in_scraping=False
+            usable_website_data=api_call_pro.ask_llm(tmp,False,["convert the given data into human readable way",
+            "Company Profile, About, Coverage Areas, People, founders and their socials,",
+            "Cap Tables, Investments & Acquisitions Exits, Funding & Investors",
+            "Competitive Landscape, Competitors, Explore Similar, Comparable",
+            "Market share and retention, Reports, News",
+            "Financials, Key Metrics, Metrics",
+            "Social Media profile and metrics"
+            ])
+
+
+
+        
     url_store=""
     url_array=[]
     url_register_available=False
@@ -72,21 +82,25 @@ def url_to_llm_explainer(url):
     important_urls= list(set(important_urls))
     spare_urls= list(set(spare_urls))
     main_points=api_call_pro.ask_llm(tmp,False,"what are the main points in this data")
-    save_data=open("knowlege_base/"+name_of_file+"/company_website_details.txt","w")
+    save_data=open("knowlege_base/"+name_of_file+"/company_website_details.txt","w",encoding="utf-8")
     save_data.write(usable_website_data)
     save_data.close()
-    save_data=open("knowlege_base/"+name_of_file+"/important_urls.txt","w")
+    save_data=open("knowlege_base/"+name_of_file+"/important_urls.txt","w",encoding="utf-8")
     for i in important_urls:
         save_data.write(i+"\n")
     save_data.close()
-    save_data=open("knowlege_base/"+name_of_file+"/spare_urls.txt","w")
+    save_data=open("knowlege_base/"+name_of_file+"/spare_urls.txt","w",encoding="utf-8")
     for i in spare_urls:
         save_data.write(i+"\n")
     save_data.close()
-    save_data=open("knowlege_base/"+name_of_file+"/main_points.txt","w")
+    save_data=open("knowlege_base/"+name_of_file+"/main_points.txt","w",encoding="utf-8")
     save_data.write(main_points)
     save_data.close()
     save_data=open("knowlege_base/"+name_of_file+"/raw_data.txt","w",encoding="utf-8")
     save_data.write(tmp)
-    save_data.close
+    save_data.close()
+    context_file=open("knowlege_base/"+name_of_file+"/company_website_details.txt", "r").read()
+    context=api_call_pro.ask_llm(context_file,False,["what is the product in following .please provide a detailed description","only include details that are present in the following"])
+    open("knowlege_base/"+name_of_file+"/product.txt", "w").write(context)
+    
     return [usable_website_data,important_urls,spare_urls,main_points]

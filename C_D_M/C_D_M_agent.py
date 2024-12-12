@@ -13,5 +13,7 @@ def customer_discovery_module_agent(company_name):
     need=NMA.need_of_the_customer(product,icp)
     validation=VPA.vpa(product,icp,need)
     customer_journey_simulation=CJS.customer_journey_simulation(company_name)
+    print("simulated_journey")
     response=report_builder.report_builder([icp,need,validation,customer_journey_simulation],"Customer discovery module",company_name)
+    print("CDM COMPLETe")
     return response
