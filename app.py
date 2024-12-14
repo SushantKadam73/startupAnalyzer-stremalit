@@ -39,13 +39,23 @@ async def technical_report(country: str, industry: str, company_name: str,url:st
     return await generate_report(company_name, st.session_state.analysis_tool)
 
 async def customer_discovery_analysis(country: str, industry: str, company_name: str,url:str) -> str:
-    company_name=modules.small_modules.extract_website_name(url)
-    give_=url_to_llm_friend.url_to_llm_explainer(url)
-    report_path=C_D_M_agent.customer_discovery_module_agent(company_name)
+    try:
+        company_name=modules.small_modules.extract_website_name(url)
+        report_path=C_D_M_agent.customer_discovery_module_agent(company_name)
+    except:
+        give_=url_to_llm_friend.url_to_llm_explainer(url)
+        company_name=modules.small_modules.extract_website_name(url)
+        report_path=C_D_M_agent.customer_discovery_module_agent(company_name)
     return report_path
 
 async def Product_Evolution_Analysis(country: str, industry: str, company_name: str,url:str) -> str:
-    report_path=A_F_C.collect_feedback_of_the_user(company_name)
+    try:
+        company_name=modules.small_modules.extract_website_name(url)
+        report_path=A_F_C.collect_feedback_of_the_user(company_name)
+    except:
+        give_=url_to_llm_friend.url_to_llm_explainer(url)
+        company_name=modules.small_modules.extract_website_name(url)
+        report_path=A_F_C.collect_feedback_of_the_user(company_name)
     return report_path
 
 st.set_page_config(page_title="Startup analysis", layout="wide")
@@ -118,6 +128,7 @@ if analyze_button:
                     with open(result_file, 'r', encoding='utf-8') as f:
                         st.session_state.analysis_result = f.read()
                 else:
+                    print(result_file)
                     st.error("Analysis failed to generate results")
             else:
                 st.warning("Selected analysis type not yet implemented")
@@ -126,5 +137,28 @@ if analyze_button:
 
 # Display results
 if st.session_state.analysis_result:
-    st.markdown(st.session_state.analysis_result)
+    from markdown_pdf import MarkdownPdf, Section
+    pdf = MarkdownPdf()
+    pdf.meta["title"] = 'Title'
+    pdf.add_section(Section(st.session_state.analysis_result, toc=False))
+    pdf.save('output.pdf')
+    with open("output.pdf", "rb") as pdf_file:
+        st.download_button(
+            label="Download Report",
+            data=pdf_file,
+            file_name="report.pdf",
+            mime="application/octet-stream"
+        )
+    
+    st.markdown(f"""
+    <div style="background-color:#1f1f1f; padding:10px; border-radius:5px;">
+    {st.session_state.analysis_result}
+    </div>
+    """, unsafe_allow_html=True)
+else:
+    st.markdown(f"""
+    <div style="background-color:#1f1f1f; padding:10px; border-radius:5px;font-size:xx-small">
+    <p>works best with public crawlable website</p>
+    </div>
+    """, unsafe_allow_html=True)
 

@@ -10,7 +10,7 @@ def report_builder(datapoint_list,topic_name,company_name):
     location_of_report="knowlege_base/"+company_name+"/"+topic_name+"_report.md"
     updated_recent,processed_report=small_modules.is_file_present_updated(location_of_report)
     if updated_recent==True:
-        return processed_report
+        return location_of_report
     else:
         pass
     report_data=[]
@@ -22,7 +22,7 @@ def report_builder(datapoint_list,topic_name,company_name):
     processed_report="".join(report_data)
     report_save.write(processed_report)
     report_save.close()
-    return processed_report
+    return location_of_report
 
 
 def product_analysis(company_name,instructions):
