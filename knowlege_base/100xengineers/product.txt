@@ -1,1 +1,13 @@
-100xEngineers is a generative AI engineering course.  It aims to teach practical skills in generative AI through project-based learning, distinguishing itself from courses focusing solely on tools like ChatGPT.  The course covers a range of topics, including generative AI fundamentals, diffusion models (with a focus on Stable Diffusion), prompt engineering, fine-tuning models, model deployment (MLOps), and specific tools and frameworks like PyTorch, Langchain, GitHub, Google Colab, and various AI APIs (OpenAI, DALL-E 3, etc.).  The course also includes instruction on LLMs, AI Agents, RAG (Retrieval Augmented Generation) and vector databases.
+100xEngineers is a course provider offering a generative AI engineering course.  The course focuses on practical skills rather than just tools like ChatGPT.  It emphasizes project-based learning and covers various topics including:
+
+* **Fundamentals:** Generative AI history, research, and platforms.
+* **Diffusion Models:** Detailed explanations and application, including Stable Diffusion.
+* **Prompt Engineering:** Techniques for effective prompt creation.
+* **Fine-tuning Models:**  Using LoRA datasets, parameters, and advanced techniques.
+* **Model Deployment (MLOps):** Implementation and deployment of models.
+* **PyTorch, LLMs, and AI Agents:**  Understanding neural networks, large language models, and hands-on experience with AI agents like Autogen and crewAI.
+* **RAG (Retrieval Augmented Generation):** Usage of Langchain and Llamaindex.
+* **Vector Databases:**  Leveraging vector databases for LLM memory.
+* **Tools & Frameworks:**  Practical application of Python, Langchain, GitHub, Google Colab, DALL-E 3, PyTorch, Hugging Face, CivitAI, Midjourney, Replicate, Dreambooth, OpenAI API, Auto1111, Stable Diffusion, and ComfyUI.
+
+The course is intended for beginners and experienced professionals wanting to upskill or transition careers.  The course creators include experienced AI professionals and educators.
